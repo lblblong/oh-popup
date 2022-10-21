@@ -1,0 +1,32 @@
+{
+  "name": "oh-popup",
+  "version": "0.1.0",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "./src/index.ts",
+  "publishConfig": {
+    "types": "./dist/index.d.ts",
+    "main": "./dist/oh-popup.js",
+    "module": "./dist/oh-popup.js",
+    "exports": {
+      ".": {
+        "import": "./dist/oh-popup.js"
+      }
+    }
+  },
+  "scripts": {
+    "dev": "tsc && vite build -w",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.4",
+    "vite": "^3.0.2",
+    "vite-plugin-dts": "^1.4.0"
+  },
+  "dependencies": {
+    "mitt": "^3.0.0"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "oh-popup-react",
+  "version": "0.1.2",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "./src/index.ts",
+  "publishConfig": {
+    "types": "./dist/index.d.ts",
+    "main": "./dist/oh-popup-react.js",
+    "module": "./dist/oh-popup-react.js",
+    "exports": {
+      ".": {
+        "import": "./dist/oh-popup-react.js"
+      },
+      "./dist/style.css": {
+        "import": "./dist/style.css"
+      }
+    }
+  },
+  "scripts": {
+    "dev": "tsc && vite build -w",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "clsx": "^1.2.0",
+    "react-transition-group": "^4.4.5"
+  },
+  "peerDependencies": {
+    "oh-popup": "workspace:*",
+    "react": ">=16",
+    "react-dom": ">=16"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vitejs/plugin-react": "^2.0.0",
+    "oh-popup": "workspace:*",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "sass": "^1.53.0",
+    "typescript": "^4.6.3",
+    "vite": "^3.0.2",
+    "vite-plugin-dts": "^1.4.0"
+  }
+}
