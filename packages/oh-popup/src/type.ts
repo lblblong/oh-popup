@@ -3,6 +3,7 @@ export type Position = 'left' | 'right' | 'bottom' | 'top' | 'center'
 export interface PopupController {
   close(result?: unknown): void
   onlyClose(): void
+  handleClosed(cb: () => void): void
 }
 
 export type PopupState =

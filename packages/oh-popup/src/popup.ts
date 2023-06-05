@@ -5,7 +5,7 @@ import {
   AugmentedRequired,
   PopupController,
   PopupState,
-  Position
+  Position,
 } from './type'
 
 export class Popup<T = any> {
@@ -65,6 +65,9 @@ export class Popup<T = any> {
         }
         this.onClose()
       },
+      handleClosed: (cb) => {
+        this.on('closed', cb)
+      },
     }
 
     this.updateState('created')
@@ -90,7 +93,10 @@ export class Popup<T = any> {
 
     this.updateState('beforeUnmount')
     this.updateVisible(false)
-    if (this.callbackWhen === 'onClose') this.emitBack()
+    if (this.callbackWhen === 'onClose') {
+      this.emit('closed')
+      this.emitBack()
+    }
   }
 
   onClosed = () => {
@@ -98,7 +104,14 @@ export class Popup<T = any> {
     this.updateState('unmounted')
 
     this.manager.destroy(this.key)
-    if (this.callbackWhen === 'onClosed') this.emitBack()
+    if (this.callbackWhen === 'onClosed') {
+      this.emit('closed')
+      this.emitBack()
+    }
+  }
+
+  emit = (type: string, event?: unknown) => {
+    this.event.emit(type, event)
   }
 
   on = (type: string, handler: Handler) => {
