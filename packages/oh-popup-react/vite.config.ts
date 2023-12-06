@@ -13,6 +13,7 @@ export default defineConfig({
   ],
   build: {
     lib: {
+      fileName: 'index',
       entry: path.resolve(__dirname, 'src/index.ts'),
       formats: ['es'],
     },

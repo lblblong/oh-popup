@@ -9,16 +9,7 @@
   },
   "dependencies": {
     "oh-popup": "workspace:*",
-    "oh-popup-react": "workspace:*",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "oh-popup-react": "workspace:*"
   },
-  "devDependencies": {
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "@vitejs/plugin-react": "^2.0.0",
-    "sass": "^1.53.0",
-    "typescript": "^4.6.3",
-    "vite": "^3.0.2"
-  }
+  "devDependencies": {}
 }

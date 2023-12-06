@@ -1,6 +1,6 @@
 {
   "name": "oh-popup-react-native",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "files": [
     "dist"
   ],
@@ -8,11 +8,11 @@
   "main": "./src/index.ts",
   "publishConfig": {
     "types": "./dist/index.d.ts",
-    "main": "./dist/oh-popup-react-native.js",
-    "module": "./dist/oh-popup-react-native.js",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
     "exports": {
       ".": {
-        "import": "./dist/oh-popup-react-native.js"
+        "import": "./dist/index.js"
       }
     }
   },
@@ -24,20 +24,12 @@
   "dependencies": {},
   "peerDependencies": {
     "oh-popup": "workspace:*",
-    "react": ">=16",
-    "react-dom": ">=16",
-    "react-native": ">=0.69.0"
+    "react": ">=18",
+    "react-dom": ">=18",
+    "react-native": ">=0.72"
   },
   "devDependencies": {
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "@types/react-native": "^0.69.3",
-    "@vitejs/plugin-react": "^2.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "oh-popup": "workspace:*",
-    "typescript": "^4.6.4",
-    "vite": "^3.0.2",
-    "vite-plugin-dts": "^1.4.0"
+    "@types/react-native": "^0.72.6",
+    "oh-popup": "workspace:*"
   }
 }

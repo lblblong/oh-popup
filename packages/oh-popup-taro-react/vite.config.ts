@@ -13,6 +13,7 @@ export default defineConfig({
   ],
   build: {
     lib: {
+      fileName: 'index',
       entry: path.resolve(__dirname, 'src/index.ts'),
       formats: ['es'],
     },
@@ -24,7 +25,7 @@ export default defineConfig({
         'oh-popup',
         'clsx',
         '@tarojs/components',
-        '@tarojs/taro'
+        '@tarojs/taro',
       ],
     },
   },
