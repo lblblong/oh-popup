@@ -1,17 +1,22 @@
 import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import {
-    Animated,
-    Dimensions,
-    ScaledSize,
-    ScrollView,
-    StyleProp,
-    TouchableWithoutFeedback,
-    View,
-    ViewStyle
+  Dimensions,
+  ScaledSize,
+  ScrollView,
+  StyleProp,
+  TouchableWithoutFeedback,
+  View,
+  ViewStyle,
 } from 'react-native'
+import Animated, {
+  Easing,
+  FadeIn,
+  FadeOut,
+  runOnJS,
+} from 'react-native-reanimated'
 import { useUpdate } from '../../hooks/useUpdate'
 import { Position } from './type'
-import { usePopupAnim } from './usePopupAnim'
+import { usePopupConfig } from './usePopupConfig'
 
 export interface PopupProps {
   visible: boolean
@@ -31,10 +36,12 @@ export interface PopupProps {
 
 export const Popup: FC<PopupProps> = (props) => {
   const {
-    visible,
-    position,
-    duration,
-    zIndex,
+    visible = false,
+    position = 'bottom',
+    duration = 300,
+    zIndex = 999,
+    maskClosable = true,
+    mask = true,
     onClose,
     destroyOnClose,
     children,
@@ -50,105 +57,113 @@ export const Popup: FC<PopupProps> = (props) => {
       screenRef.current = screen
       update()
     })
-    return () => subscription?.remove()
+    return () => {
+      subscription?.remove()
+    }
   }, [])
 
   const [animatedVisible, setAnimatedVisible] = useState(visible)
-  const contentAnim = usePopupAnim({
-    position: position!,
-    duration: duration!,
-  })
 
-  const opacityAnim = useRef(new Animated.Value(0)).current
+  const config = usePopupConfig(position)
 
-  const maskShow = () => {
-    if (props.mask === false) return
-    const opacity =
-      props.mask === true || props.mask === undefined ? 0.73 : props.mask
-
-    Animated.timing(opacityAnim, {
-      toValue: opacity,
-      duration,
-      useNativeDriver: true,
-    }).start(() => {
-      props.onOpened?.()
-    })
+  const onOpened = () => {
+    props.onOpened?.()
   }
 
-  const maskHide = () => {
-    if (props.mask === false) return
-
-    Animated.timing(opacityAnim, {
-      toValue: 0,
-      duration,
-      useNativeDriver: true,
-    }).start(() => {
-      setAnimatedVisible(false)
-      props.onClosed?.()
-    })
+  const onClosed = () => {
+    setAnimatedVisible(false)
+    props.onClosed?.()
   }
 
   useLayoutEffect(() => {
     if (visible) {
       setAnimatedVisible(true)
-      maskShow()
-      contentAnim.show()
     } else {
-      maskHide()
-      contentAnim.hide()
+      setAnimatedVisible(false)
     }
   }, [visible])
 
   const onMaskClick = () => {
-    if (props.maskClosable) onClose?.()
+    if (maskClosable) {
+      setAnimatedVisible(false)
+      onClose?.()
+    }
   }
 
   const renderMask = () => {
-    if (animatedVisible === false) return null
-    if (props.mask === false) return null
+    if (mask === false) return null
+
+    const opacity = typeof mask === 'number' ? mask : 0.73
 
     return (
       <TouchableWithoutFeedback onPress={onMaskClick}>
-        <Animated.View
-          style={[
-            {
-              zIndex,
-              position: 'absolute',
-              left: 0,
-              top: 0,
-              right: 0,
-              bottom: 0,
-              opacity: opacityAnim,
-              backgroundColor: '#000000',
-            },
-            props.maskStyle,
-          ]}
-        ></Animated.View>
+        {animatedVisible ? (
+          <Animated.View
+            style={[
+              {
+                zIndex,
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                right: 0,
+                bottom: 0,
+              },
+            ]}
+            entering={FadeIn.duration(duration)
+              .easing(Easing.ease)
+              .withCallback(() => {
+                'worklet'
+                runOnJS(onOpened)()
+              })}
+            exiting={FadeOut.duration(duration)
+              .easing(Easing.ease)
+              .withCallback(() => {
+                'worklet'
+                runOnJS(onClosed)()
+              })}
+          >
+            <View
+              style={[
+                {
+                  width: '100%',
+                  height: '100%',
+                  opacity,
+                  backgroundColor: '#000000',
+                },
+                props.maskStyle,
+              ]}
+            ></View>
+          </Animated.View>
+        ) : (
+          <View></View>
+        )}
       </TouchableWithoutFeedback>
     )
   }
 
   const renderPopup = () => {
-    if (animatedVisible === false) return null
-
     return (
       <ScrollView
         style={{
           position: 'absolute',
           left: 0,
           top: 0,
-          right: 0,
-          bottom: 0,
+          width: screenRef.current!.width,
+          height: screenRef.current!.height,
           zIndex,
         }}
       >
         <View
-          style={{
-            position: 'relative',
-            width: screenRef.current!.width,
-            height: screenRef.current!.height,
-            zIndex,
-          }}
+          style={[
+            {
+              position: 'relative',
+              flexDirection: 'column',
+              width: screenRef.current!.width,
+              height: screenRef.current!.height,
+              zIndex,
+            },
+            config.style,
+          ]}
         >
           <TouchableWithoutFeedback onPress={onMaskClick}>
             <View
@@ -161,19 +176,17 @@ export const Popup: FC<PopupProps> = (props) => {
               }}
             ></View>
           </TouchableWithoutFeedback>
-          <View style={contentAnim.style}>
+          {animatedVisible && (
             <Animated.View
-              style={[
-                {
-                  zIndex,
-                },
-                contentAnim.innerStyle,
-                props.style,
-              ]}
+              style={[{ zIndex }, props.style]}
+              entering={config.entering
+                .duration(duration)
+                .easing(Easing.linear)}
+              exiting={config.exiting.duration(duration).easing(Easing.linear)}
             >
               {children}
             </Animated.View>
-          </View>
+          )}
         </View>
       </ScrollView>
     )
@@ -185,14 +198,4 @@ export const Popup: FC<PopupProps> = (props) => {
       {renderPopup()}
     </>
   )
-}
-
-Popup.defaultProps = {
-  visible: false,
-  duration: 300,
-  zIndex: 999,
-  mask: true,
-  position: 'bottom',
-  destroyOnClose: false,
-  maskClosable: true,
 }

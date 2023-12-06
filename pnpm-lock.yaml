@@ -94,6 +94,9 @@ importers:
       oh-popup:
         specifier: workspace:*
         version: link:../oh-popup
+      react-native-reanimated:
+        specifier: ^3.6.1
+        version: 3.6.1(@babel/core@7.23.5)(@babel/plugin-proposal-nullish-coalescing-operator@7.18.6)(@babel/plugin-proposal-optional-chaining@7.21.0)(@babel/plugin-transform-arrow-functions@7.18.6)(@babel/plugin-transform-shorthand-properties@7.18.6)(@babel/plugin-transform-template-literals@7.18.9)(react-native@0.72.7)(react@18.2.0)
 
   packages/oh-popup-taro-react:
     dependencies:
@@ -1958,6 +1961,16 @@ packages:
       '@babel/core': 7.23.5
       '@babel/helper-plugin-utils': 7.18.9
 
+  /@babel/plugin-transform-object-assign@7.23.3(@babel/core@7.23.5):
+    resolution: {integrity: sha512-TPJ6O7gVC2rlQH2hvQGRH273G1xdoloCj9Pc07Q7JbIZYDi+Sv5gaE2fu+r5E7qK4zyt6vj0FbZaZTRU5C3OMA==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.23.5
+      '@babel/helper-plugin-utils': 7.22.5
+    dev: true
+
   /@babel/plugin-transform-object-super@7.18.6(@babel/core@7.18.6):
     resolution: {integrity: sha512-uvGz6zk+pZoS1aTZrOvrbj6Pp/kK2mp45t2B+bTDre2UgsZZ8EZLSJtUg7m/no0zOJUWgFONpB7Zv9W2tSaFlA==}
     engines: {node: '>=6.9.0'}
@@ -2545,6 +2558,20 @@ packages:
       '@babel/plugin-transform-typescript': 7.18.12(@babel/core@7.18.6)
     transitivePeerDependencies:
       - supports-color
+
+  /@babel/preset-typescript@7.18.6(@babel/core@7.23.5):
+    resolution: {integrity: sha512-s9ik86kXBAnD760aybBucdpnLsAt0jK1xqJn2juOn9lkOvSHV60os5hxoVJsPzMQxvnUJFAlkont2DvvaYEBtQ==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.23.5
+      '@babel/helper-plugin-utils': 7.18.9
+      '@babel/helper-validator-option': 7.18.6
+      '@babel/plugin-transform-typescript': 7.18.12(@babel/core@7.23.5)
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
 
   /@babel/register@7.18.9(@babel/core@7.18.6):
     resolution: {integrity: sha512-ZlbnXDcNYHMR25ITwwNKT88JiaukkdVj/nG7r3wnuXkOTHc60Uy05PwMCPre0hSkY68E6zK3xz+vUJSP2jWmcw==}
@@ -9831,6 +9858,34 @@ packages:
 
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+
+  /react-native-reanimated@3.6.1(@babel/core@7.23.5)(@babel/plugin-proposal-nullish-coalescing-operator@7.18.6)(@babel/plugin-proposal-optional-chaining@7.21.0)(@babel/plugin-transform-arrow-functions@7.18.6)(@babel/plugin-transform-shorthand-properties@7.18.6)(@babel/plugin-transform-template-literals@7.18.9)(react-native@0.72.7)(react@18.2.0):
+    resolution: {integrity: sha512-F4vG9Yf9PKmE3GaWtVGUpzj3SM6YY2cx1yRHCwiMd1uY7W0gU017LfcVUorboJnj0y5QZqEriEK1Usq2Y8YZqg==}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+      '@babel/plugin-proposal-nullish-coalescing-operator': ^7.0.0-0
+      '@babel/plugin-proposal-optional-chaining': ^7.0.0-0
+      '@babel/plugin-transform-arrow-functions': ^7.0.0-0
+      '@babel/plugin-transform-shorthand-properties': ^7.0.0-0
+      '@babel/plugin-transform-template-literals': ^7.0.0-0
+      react: '*'
+      react-native: '*'
+    dependencies:
+      '@babel/core': 7.23.5
+      '@babel/plugin-proposal-nullish-coalescing-operator': 7.18.6(@babel/core@7.23.5)
+      '@babel/plugin-proposal-optional-chaining': 7.21.0(@babel/core@7.23.5)
+      '@babel/plugin-transform-arrow-functions': 7.18.6(@babel/core@7.23.5)
+      '@babel/plugin-transform-object-assign': 7.23.3(@babel/core@7.23.5)
+      '@babel/plugin-transform-shorthand-properties': 7.18.6(@babel/core@7.23.5)
+      '@babel/plugin-transform-template-literals': 7.18.9(@babel/core@7.23.5)
+      '@babel/preset-typescript': 7.18.6(@babel/core@7.23.5)
+      convert-source-map: 2.0.0
+      invariant: 2.2.4
+      react: 18.2.0
+      react-native: 0.72.7(@babel/core@7.23.5)(@babel/preset-env@7.18.10)(react@18.2.0)
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
 
   /react-native@0.72.7(@babel/core@7.23.5)(@babel/preset-env@7.18.10)(react@18.2.0):
     resolution: {integrity: sha512-dqVFojOO9rOvyFbbM3/v9/GJR355OSuBhEY4NQlMIRc2w0Xch5MT/2uPoq3+OvJ+5h7a8LFAco3fucSffG0FbA==}
