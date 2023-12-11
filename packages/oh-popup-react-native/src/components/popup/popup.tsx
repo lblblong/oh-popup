@@ -2,11 +2,10 @@ import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import {
   Dimensions,
   ScaledSize,
-  ScrollView,
   StyleProp,
   TouchableWithoutFeedback,
   View,
-  ViewStyle,
+  ViewStyle
 } from 'react-native'
 import Animated, {
   Easing,
@@ -143,52 +142,41 @@ export const Popup: FC<PopupProps> = (props) => {
 
   const renderPopup = () => {
     return (
-      <ScrollView
-        style={{
-          position: 'absolute',
-          left: 0,
-          top: 0,
-          width: screenRef.current!.width,
-          height: screenRef.current!.height,
-          zIndex,
-        }}
+      <View
+        style={[
+          {
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            right: 0,
+            zIndex,
+            flexDirection: 'column',
+          },
+          config.style,
+        ]}
       >
-        <View
-          style={[
-            {
-              position: 'relative',
-              flexDirection: 'column',
-              width: screenRef.current!.width,
-              height: screenRef.current!.height,
-              zIndex,
-            },
-            config.style,
-          ]}
-        >
-          <TouchableWithoutFeedback onPress={onMaskClick}>
-            <View
-              style={{
-                position: 'absolute',
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0,
-              }}
-            ></View>
-          </TouchableWithoutFeedback>
-          {animatedVisible && (
-            <Animated.View
-              style={[{ zIndex }, props.style]}
-              entering={config.entering
-                .duration(duration)
-                .easing(Easing.linear)}
-              exiting={config.exiting.duration(duration).easing(Easing.linear)}
-            >
-              {children}
-            </Animated.View>
-          )}
-        </View>
-      </ScrollView>
+        <TouchableWithoutFeedback onPress={onMaskClick}>
+          <View
+            style={{
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+            }}
+          ></View>
+        </TouchableWithoutFeedback>
+        {animatedVisible && (
+          <Animated.View
+            style={[{ zIndex }, props.style]}
+            entering={config.entering.duration(duration).easing(Easing.linear)}
+            exiting={config.exiting.duration(duration).easing(Easing.linear)}
+          >
+            {children}
+          </Animated.View>
+        )}
+      </View>
     )
   }
 

@@ -25,6 +25,7 @@ export default defineConfig({
         'react-native',
         'oh-popup',
         'react-native-reanimated',
+        'react-native-root-siblings',
       ],
     },
   },
