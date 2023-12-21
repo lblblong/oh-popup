@@ -144,7 +144,7 @@ export const Popup: FC<PopupProps> = (props) => {
           },
           config.style,
         ]}
-        pointerEvents="none"
+        pointerEvents="box-none"
       >
         {animatedVisible && (
           <Animated.View
