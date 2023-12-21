@@ -14,12 +14,12 @@ export const PopupProvider: FC<PopupProviderProps> = ({ popup }) => {
   useEffect(() => {
     popup.updateState('beforeMount')
 
-    const lisenter = () => {
+    const listener = () => {
       update()
     }
 
-    popup.on('change', lisenter)
-    return () => popup.off('change', lisenter)
+    popup.on('change', listener)
+    return () => popup.off('change', listener)
   }, [])
 
   useLayoutEffect(() => {

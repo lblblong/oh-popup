@@ -5,7 +5,7 @@ import {
   StyleProp,
   TouchableWithoutFeedback,
   View,
-  ViewStyle
+  ViewStyle,
 } from 'react-native'
 import Animated, {
   Easing,
@@ -70,7 +70,6 @@ export const Popup: FC<PopupProps> = (props) => {
   }
 
   const onClosed = () => {
-    setAnimatedVisible(false)
     props.onClosed?.()
   }
 
@@ -108,18 +107,8 @@ export const Popup: FC<PopupProps> = (props) => {
                 bottom: 0,
               },
             ]}
-            entering={FadeIn.duration(duration)
-              .easing(Easing.ease)
-              .withCallback(() => {
-                'worklet'
-                runOnJS(onOpened)()
-              })}
-            exiting={FadeOut.duration(duration)
-              .easing(Easing.ease)
-              .withCallback(() => {
-                'worklet'
-                runOnJS(onClosed)()
-              })}
+            entering={FadeIn.duration(duration).easing(Easing.ease)}
+            exiting={FadeOut.duration(duration).easing(Easing.ease)}
           >
             <View
               style={[
@@ -155,23 +144,25 @@ export const Popup: FC<PopupProps> = (props) => {
           },
           config.style,
         ]}
+        pointerEvents="none"
       >
-        <TouchableWithoutFeedback onPress={onMaskClick}>
-          <View
-            style={{
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0,
-            }}
-          ></View>
-        </TouchableWithoutFeedback>
         {animatedVisible && (
           <Animated.View
             style={[{ zIndex }, props.style]}
-            entering={config.entering.duration(duration).easing(Easing.linear)}
-            exiting={config.exiting.duration(duration).easing(Easing.linear)}
+            entering={config.entering
+              .duration(duration)
+              .easing(Easing.linear)
+              .withCallback(() => {
+                'worklet'
+                runOnJS(onOpened)()
+              })}
+            exiting={config.exiting
+              .duration(duration)
+              .easing(Easing.linear)
+              .withCallback(() => {
+                'worklet'
+                runOnJS(onClosed)()
+              })}
           >
             {children}
           </Animated.View>
