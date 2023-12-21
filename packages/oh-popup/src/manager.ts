@@ -55,30 +55,31 @@ export class PopupManager {
 
       this.count++
 
-      this.popups.push(
-        new Popup({
-          manager: this,
-          key: opts.key || `oh-popup-item-id__${this.count}`,
-          el: opts.el,
-          position: opts.position,
-          duration: opts.duration,
-          mask: opts.mask,
-          zIndex: opts.zIndex,
-          maskClosable: opts.maskClosable,
-          maskClass: opts.maskClass,
-          className: opts.className,
-          promise: {
-            resolve,
-            reject,
-          },
-          callbackWhen: opts.callbackWhen,
-          callbacks: {
-            onClose: opts.onClose,
-            onClosed: opts.onClosed,
-            onOpened: opts.onOpened,
-          },
-        })
-      )
+      const newPopup = new Popup({
+        manager: this,
+        key: opts.key || `oh-popup-item-id__${this.count}`,
+        el: opts.el,
+        position: opts.position,
+        duration: opts.duration,
+        mask: opts.mask,
+        zIndex: opts.zIndex,
+        maskClosable: opts.maskClosable,
+        maskClass: opts.maskClass,
+        className: opts.className,
+        promise: {
+          resolve,
+          reject,
+        },
+        callbackWhen: opts.callbackWhen,
+        callbacks: {
+          onClose: opts.onClose,
+          onClosed: opts.onClosed,
+          onOpened: opts.onOpened,
+        },
+      })
+
+      this.popups.push(newPopup)
+      this.event.emit('new-popup', newPopup)
       this.emitChange()
     })
   }
@@ -100,7 +101,9 @@ export class PopupManager {
     }
     if (index === -1) return
 
+    const popup = this.popups[index]
     this.popups.splice(index, 1)
+    this.event.emit('destroy-popup', popup)
     this.emitChange()
   }
 
