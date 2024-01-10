@@ -35,7 +35,7 @@ export interface PopupProps {
   node?: HTMLElement
 }
 
-export const Popup: FC<PopupProps> = props => {
+export const Popup: FC<PopupProps> = (props) => {
   const {
     visible,
     position,
@@ -48,14 +48,16 @@ export const Popup: FC<PopupProps> = props => {
     node,
   } = props
 
+  const containerRef = React.useRef<HTMLDivElement>(null)
+
+  const onMaskClick = () => {
+    if (props.maskClosable) onClose()
+  }
+
   const renderMask = () => {
     if (props.mask === false) return null
 
     const opacity = props.mask === true ? 0.73 : props.mask
-
-    const onMaskClick = () => {
-      if (props.maskClosable) onClose()
-    }
 
     const maskCls = clsx(`${prefixCls}-mask`, props.maskClass)
 
@@ -104,6 +106,10 @@ export const Popup: FC<PopupProps> = props => {
             zIndex,
             transitionDuration: `${duration}ms`,
             ...props.style,
+          }}
+          ref={containerRef}
+          onClick={(e) => {
+            if (e.target === containerRef.current) onMaskClick()
           }}
         >
           {children}
