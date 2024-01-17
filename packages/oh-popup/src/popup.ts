@@ -65,8 +65,14 @@ export class Popup<T = any> {
         }
         this.onClose()
       },
-      handleClosed: (cb) => {
-        this.on('closed', cb)
+      setResult: (result?: unknown) => {
+        if (result === null || result === undefined) return
+
+        if (result && result instanceof Error) {
+          this.emitBack = () => this.promise?.reject(result)
+        } else {
+          this.emitBack = () => this.promise?.resolve(result)
+        }
       },
     }
 

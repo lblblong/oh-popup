@@ -1,6 +1,6 @@
 {
   "name": "oh-popup-taro-react",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "files": [
     "dist"
   ],
@@ -22,7 +22,8 @@
   "scripts": {
     "dev": "tsc && vite build -w",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepublishOnly": "tsc && vite build"
   },
   "dependencies": {
     "clsx": "^1.2.0"

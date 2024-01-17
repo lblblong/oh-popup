@@ -1,6 +1,6 @@
 {
   "name": "oh-popup-react-native",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "files": [
     "dist"
   ],
@@ -19,7 +19,8 @@
   "scripts": {
     "dev": "tsc && vite build -w",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepublishOnly": "tsc && vite build"
   },
   "dependencies": {},
   "peerDependencies": {

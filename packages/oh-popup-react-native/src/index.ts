@@ -3,6 +3,7 @@ export type {
   PopupProps as PopupComponentProps,
   Position
 } from './components/popup'
-export { registerManager } from './register'
 export { useController } from './hooks/useController'
+export { useSetResult } from './hooks/useSetResult'
+export { registerManager } from './register'
 
