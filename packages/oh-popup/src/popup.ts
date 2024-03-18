@@ -65,6 +65,9 @@ export class Popup<T = any> {
         }
         this.onClose()
       },
+      onClosed: (cb: () => void) => {
+        this.on('closed', cb)
+      },
       setResult: (result?: unknown) => {
         if (result === null || result === undefined) return
 
