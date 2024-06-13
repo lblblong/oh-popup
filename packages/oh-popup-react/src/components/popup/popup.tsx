@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, { FC } from 'react'
+import React from 'react'
 import { CSSTransition } from 'react-transition-group'
 import './index.scss'
 import { Portal } from './portal'
@@ -35,31 +35,39 @@ export interface PopupProps {
   node?: HTMLElement
 }
 
-export const Popup: FC<PopupProps> = (props) => {
+export function Popup(props: PopupProps) {
   const {
-    visible,
-    position,
-    duration,
-    zIndex,
+    visible = false,
+    position = 'bottom',
+    mask = true,
+    duration = 300,
+    zIndex = 999,
     onClose,
-    destroyOnClose,
+    maskClosable = false,
+    destroyOnClose = false,
     children,
     transition,
+    maskClass,
     node,
+    className,
+    onClosed,
+    onOpened,
+    style,
+    maskStyle,
   } = props
 
   const containerRef = React.useRef<HTMLDivElement>(null)
 
   const onMaskClick = () => {
-    if (props.maskClosable) onClose()
+    if (maskClosable) onClose()
   }
 
   const renderMask = () => {
-    if (props.mask === false) return null
+    if (mask === false) return null
 
-    const opacity = props.mask === true ? 0.73 : props.mask
+    const opacity = mask === true ? 0.73 : mask
 
-    const maskCls = clsx(`${prefixCls}-mask`, props.maskClass)
+    const maskCls = clsx(`${prefixCls}-mask`, maskClass)
 
     return (
       <CSSTransition
@@ -75,7 +83,7 @@ export const Popup: FC<PopupProps> = (props) => {
             zIndex,
             transitionDuration: `${duration}ms`,
             background: `rgba(0, 0, 0, ${opacity})`,
-            ...props.maskStyle,
+            ...maskStyle,
           }}
           onClick={onMaskClick}
         ></div>
@@ -84,11 +92,7 @@ export const Popup: FC<PopupProps> = (props) => {
   }
 
   const renderPopup = () => {
-    const popupCls = clsx(
-      prefixCls,
-      `${prefixCls}--${position}`,
-      props.className
-    )
+    const popupCls = clsx(prefixCls, `${prefixCls}--${position}`, className)
 
     return (
       <CSSTransition
@@ -97,15 +101,15 @@ export const Popup: FC<PopupProps> = (props) => {
         classNames={transition || animations[position]}
         unmountOnExit={destroyOnClose}
         appear
-        onEntered={props.onOpened}
-        onExited={props.onClosed}
+        onEntered={onOpened}
+        onExited={onClosed}
       >
         <div
           className={popupCls}
           style={{
             zIndex,
             transitionDuration: `${duration}ms`,
-            ...props.style,
+            ...style,
           }}
           ref={containerRef}
           onClick={(e) => {
@@ -124,14 +128,4 @@ export const Popup: FC<PopupProps> = (props) => {
       {renderPopup()}
     </Portal>
   )
-}
-
-Popup.defaultProps = {
-  visible: false,
-  duration: 300,
-  zIndex: 999,
-  mask: true,
-  position: 'bottom',
-  destroyOnClose: false,
-  maskClosable: false,
 }
