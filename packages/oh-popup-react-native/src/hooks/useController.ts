@@ -1,6 +1,6 @@
 import React from 'react'
-import { ControllerContext } from '../context'
+import { PopupContext } from '../context'
 
 export const useController = () => {
-  return React.useContext(ControllerContext)
+  return React.useContext(PopupContext)?.controller
 }

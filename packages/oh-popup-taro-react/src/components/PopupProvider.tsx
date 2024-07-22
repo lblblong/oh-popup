@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { Popup } from 'oh-popup'
 import { FC, useEffect, useLayoutEffect } from 'react'
-import { ControllerContext, PopupContext } from '../context'
+import { PopupContext } from '../context'
 import useUpdate from '../hooks/useUpdate'
 import { Popup as PopupComponent } from './popup'
 
@@ -42,11 +42,7 @@ export const PopupProvider: FC<PopupProviderProps> = ({ popup }) => {
       onClose={popup.onClose}
       onClosed={popup.onClosed}
     >
-      <PopupContext.Provider value={popup}>
-        <ControllerContext.Provider value={popup.controller}>
-          {popup.el}
-        </ControllerContext.Provider>
-      </PopupContext.Provider>
+      <PopupContext.Provider value={popup}>{popup.el}</PopupContext.Provider>
     </PopupComponent>
   )
 }

@@ -4,6 +4,7 @@ export type {
   Position
 } from './components/popup'
 export { useController } from './hooks/useController'
+export { useProps } from './hooks/useProps'
 export { useSetResult } from './hooks/useSetResult'
 export { registerManager } from './register'
 
