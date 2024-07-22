@@ -39,6 +39,7 @@ export class PopupManager {
           | 'duration'
           | 'callbackWhen'
           | 'className'
+          | 'props'
           | 'maskClass'
           | 'keyboard'
         >
@@ -59,6 +60,7 @@ export class PopupManager {
         manager: this,
         key: opts.key || `oh-popup-item-id__${this.count}`,
         el: opts.el,
+        props: opts.props,
         position: opts.position,
         duration: opts.duration,
         mask: opts.mask,

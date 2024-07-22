@@ -1,4 +1,4 @@
-import { useController } from 'oh-popup-react'
+import { useController, useProps } from 'oh-popup-react'
 import { popupManager } from '../../main'
 import styles from './index.module.scss'
 
@@ -6,7 +6,8 @@ interface SayHiProps {
   name: string
 }
 
-export const SayHi = ({ name }: SayHiProps) => {
+export const SayHi = () => {
+  const { name } = useProps<SayHiProps>()
   const { close, onlyClose } = useController()
 
   return (
@@ -25,7 +26,8 @@ export const SayHi = ({ name }: SayHiProps) => {
 
 export function openSayHi(props: SayHiProps, zIndex = 100) {
   return popupManager.open({
-    el: <SayHi {...props} />,
+    el: <SayHi />,
+    props,
     position: 'bottom',
     zIndex,
   })

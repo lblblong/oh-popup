@@ -14,6 +14,7 @@ export class Popup<T = any> {
   visible = true
   key!: string
   el!: T
+  props?: any
   position?: Position
   mask?: boolean | number
   zIndex!: number
