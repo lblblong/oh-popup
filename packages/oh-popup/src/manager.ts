@@ -3,11 +3,15 @@ import { Popup } from './popup'
 
 const isWeb = typeof window !== 'undefined' && window.document
 
+type PopupManagerOptions = Partial<
+  Pick<Popup, 'mask' | 'zIndex' | 'maskClosable' | 'duration' | 'callbackWhen'>
+>
+
 export class PopupManager {
   private count = 0
   event = mitt()
 
-  constructor() {
+  constructor(private opts: PopupManagerOptions = {}) {
     if (isWeb) {
       window.document.addEventListener('keyup', (e) => {
         if (e.key !== 'Escape') return
@@ -53,6 +57,8 @@ export class PopupManager {
       if (opts.key && this.includes(opts.key)) {
         throw Error(`The key "${opts.key}" already exists`)
       }
+
+      opts = Object.assign({}, this.opts, opts)
 
       this.count++
 
