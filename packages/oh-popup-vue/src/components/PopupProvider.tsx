@@ -6,7 +6,7 @@ import {
   onMounted,
   onUnmounted,
   provide,
-  ref,
+  shallowRef,
 } from 'vue'
 import { PopupContext } from '../context'
 import { Popup as PopupComponent } from './popup'
@@ -24,13 +24,12 @@ export const PopupProvider = defineComponent({
     },
   },
   setup(props) {
-    const update = ref(0)
+    const popup = shallowRef({ ...props.popup })
 
     onBeforeMount(() => {
       props.popup.updateState('beforeMount')
-
       const listener = () => {
-        update.value++
+        popup.value = { ...props.popup }
       }
 
       props.popup.on('change', listener)
@@ -45,20 +44,20 @@ export const PopupProvider = defineComponent({
 
     return () => (
       <PopupComponent
-        visible={props.popup.visible}
-        position={props.popup.position}
-        duration={props.popup.duration}
-        zIndex={props.popup.zIndex}
-        mask={props.popup.mask}
-        maskClosable={props.popup.maskClosable}
-        transition={props.popup.transition}
-        className={clsx(props.popup.className, props.popup.key)}
-        maskClass={props.popup.maskClass}
-        onOpened={() => props.popup.callbacks.onOpened?.()}
-        onClose={props.popup.onClose}
-        onClosed={props.popup.onClosed}
+        visible={popup.value.visible}
+        position={popup.value.position}
+        duration={popup.value.duration}
+        zIndex={popup.value.zIndex}
+        mask={popup.value.mask}
+        maskClosable={popup.value.maskClosable}
+        transition={popup.value.transition}
+        className={clsx(popup.value.className, popup.value.key)}
+        maskClass={popup.value.maskClass}
+        onOpened={() => popup.value.callbacks.onOpened?.()}
+        onClose={popup.value.onClose}
+        onClosed={popup.value.onClosed}
       >
-        {props.popup.el}
+        {popup.value.el}
       </PopupComponent>
     )
   },

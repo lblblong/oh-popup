@@ -1,13 +1,33 @@
+<script setup lang="ts">
+import { ManagerProvider } from 'oh-popup-vue'
+import { openSayhi } from './components'
+import { popupManager } from './manager'
+
+
+async function open() {
+  const res = await openSayhi()
+  console.log(res)
+}
+</script>
+
 <template>
+  <ManagerProvider :manager="popupManager" />
   <div>
-    <ManagerProvider :manager="popupManager" />
-    <h1>Hello World</h1>
-    <button @click="openSayHi">Open Say Hi</button>
+    <button @click="open">弹出层</button>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { popupManager } from './shared/provider'
-import { ManagerProvider } from 'oh-popup-vue'
-import { openSayHi } from './popups/sayhi/open'
-</script>
+<style scoped>
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vue:hover {
+  filter: drop-shadow(0 0 2em #42b883aa);
+}
+</style>

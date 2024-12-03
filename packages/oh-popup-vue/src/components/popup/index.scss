@@ -55,121 +55,82 @@
 
 .oh-popup {
   /* fade */
-  &-fade-enter,
-  &-fade-appear,
-  &-fade-exit-done {
+  &-fade-enter-from,
+  &-fade-leave-to {
     opacity: 0;
   }
 
-  &-fade-appear-active,
-  &-fade-enter-active {
-    opacity: 1;
+  &-fade-enter-active,
+  &-fade-leave-active {
     transition: opacity, visibility;
   }
 
-  &-fade-exit,
-  &-fade-enter-done {
+  &-fade-enter-to,
+  &-fade-leave-from {
     opacity: 1;
-  }
-
-  &-fade-exit-active {
-    opacity: 0;
-    transition: opacity, visibility;
   }
 
   /* slide-left */
-  &--right,
-  &-slide-left-enter,
-  &-slide-left-appear,
-  &-slide-left-exit-done {
+  &-slide-left-enter-from,
+  &-slide-left-leave-to {
     transform: translate(100%, 0);
   }
 
   &-slide-left-enter-active,
-  &-slide-left-appear-active {
-    transform: translate(0, 0);
+  &-slide-left-leave-active {
     transition: transform;
   }
 
-  &-slide-left-exit,
-  &-slide-left-enter-done {
+  &-slide-left-enter-to,
+  &-slide-left-leave-from {
     transform: translate(0, 0);
-  }
-
-  &-slide-left-exit-active {
-    transform: translate(100%, 0);
-    transition: transform;
   }
 
   /* slide-up */
-  &--bottom,
-  &-slide-up-enter,
-  &-slide-up-appear,
-  &-slide-up-exit-done {
+  &-slide-up-enter-from,
+  &-slide-up-leave-to {
     transform: translate(0, 100%);
   }
 
   &-slide-up-enter-active,
-  &-slide-up-appear-active {
-    transform: translate(0, 0);
+  &-slide-up-leave-active {
     transition: transform;
   }
 
-  &-slide-up-exit,
-  &-slide-up-enter-done {
+  &-slide-up-enter-to,
+  &-slide-up-leave-from {
     transform: translate(0, 0);
-  }
-
-  &-slide-up-exit-active {
-    transform: translate(0, 100%);
-    transition: transform;
   }
 
   /* slide-right */
-  &--left,
-  &-slide-right-enter,
-  &-slide-right-appear,
-  &-slide-right-exit-done {
+  &-slide-right-enter-from,
+  &-slide-right-leave-to {
     transform: translate(-100%, 0);
   }
 
   &-slide-right-enter-active,
-  &-slide-right-appear-active {
-    transform: translate(0, 0);
+  &-slide-right-leave-active {
     transition: transform;
   }
 
-  &-slide-right-exit,
-  &-slide-right-enter-done {
+  &-slide-right-enter-to,
+  &-slide-right-leave-from {
     transform: translate(0, 0);
-  }
-
-  &-slide-right-exit-active {
-    transform: translate(-100%, 0);
-    transition: transform;
   }
 
   /* slide-down */
-  &--top,
-  &-slide-down-enter,
-  &-slide-down-appear,
-  &-slide-down-exit-done {
+  &-slide-down-enter-from,
+  &-slide-down-leave-to {
     transform: translate(0, -100%);
   }
 
   &-slide-down-enter-active,
-  &-slide-down-appear-active {
-    transform: translate(0, 0);
+  &-slide-down-leave-active {
     transition: transform;
   }
 
-  &-slide-down-exit,
-  &-slide-down-enter-done {
+  &-slide-down-enter-to,
+  &-slide-down-leave-from {
     transform: translate(0, 0);
-  }
-
-  &-slide-down-exit-active {
-    transform: translate(0, -100%);
-    transition: transform;
   }
 }
