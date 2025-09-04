@@ -13,7 +13,7 @@ export class PopupManager {
 
   constructor(private opts: PopupManagerOptions = {}) {
     if (isWeb) {
-      window.document.addEventListener('keyup', (e) => {
+      window.document.addEventListener('keydown', (e) => {
         if (e.key !== 'Escape') return
         if (this.popups.length === 0) return
 
