@@ -1,6 +1,6 @@
 {
   "name": "oh-popup-react",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "files": [
     "dist"
   ],
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "clsx": "^1.2.0",
-    "react-transition-state": "^2.2.1"
+    "react-transition-state": "^2.3.1"
   },
   "peerDependencies": {
     "oh-popup": "workspace:*",
