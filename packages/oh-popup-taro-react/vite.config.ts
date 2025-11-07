@@ -9,7 +9,9 @@ export default defineConfig({
     dts({
       insertTypesEntry: true,
     }),
-    react(),
+    react({
+      jsxRuntime: 'classic'
+    }),
   ],
   build: {
     lib: {
@@ -26,6 +28,7 @@ export default defineConfig({
         'clsx',
         '@tarojs/components',
         '@tarojs/taro',
+        'react/jsx-runtime',
       ],
     },
   },
