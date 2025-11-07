@@ -5,18 +5,15 @@
     "dist"
   ],
   "type": "module",
-  "main": "./src/index.ts",
-  "publishConfig": {
-    "types": "./dist/index.d.ts",
-    "main": "./dist/index.js",
-    "module": "./dist/index.js",
-    "exports": {
-      ".": {
-        "import": "./dist/index.js"
-      },
-      "./dist/index.css": {
-        "import": "./dist/index.css"
-      }
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css"
     }
   },
   "scripts": {

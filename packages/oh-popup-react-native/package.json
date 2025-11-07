@@ -1,19 +1,15 @@
 {
   "name": "oh-popup-react-native",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "files": [
     "dist"
   ],
-  "type": "module",
-  "main": "./src/index.ts",
-  "publishConfig": {
-    "types": "./dist/index.d.ts",
-    "main": "./dist/index.js",
-    "module": "./dist/index.js",
-    "exports": {
-      ".": {
-        "import": "./dist/index.js"
-      }
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
     }
   },
   "scripts": {
@@ -32,9 +28,6 @@
     "react-native-root-siblings": ">=5"
   },
   "devDependencies": {
-    "@types/react-native": "^0.72.6",
-    "oh-popup": "workspace:*",
-    "react-native-reanimated": "^3.6.1",
-    "react-native-root-siblings": "^5.0.1"
+    "@types/react-native": "^0.72.6"
   }
 }

@@ -3,6 +3,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import path from 'path'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
+import pkg from './package.json'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -21,7 +22,11 @@ export default defineConfig({
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
-      external: ['vue', 'oh-popup', '@vue/runtime-core'],
+      external: [
+        ...Object.keys(pkg.dependencies || {}),
+        ...Object.keys(pkg.peerDependencies || {}),
+        '@vue/runtime-core',
+      ],
     },
   },
 })
