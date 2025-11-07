@@ -12,8 +12,8 @@
     ".": {
       "import": "./dist/index.js"
     },
-    "./dist/style.css": {
-      "import": "./dist/style.css"
+    "./dist/index.css": {
+      "import": "./dist/index.css"
     }
   },
   "scripts": {
