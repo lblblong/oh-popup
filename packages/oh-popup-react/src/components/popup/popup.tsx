@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import React from 'react'
-import { CSSTransition } from 'react-transition-group'
+import { useTransitionState } from 'react-transition-state'
 import './index.scss'
 import { Portal } from './portal'
 import { Position } from './type'
@@ -58,6 +58,34 @@ export function Popup(props: PopupProps) {
 
   const containerRef = React.useRef<HTMLDivElement>(null)
 
+  const [maskTransition, toggleMask] = useTransitionState({
+    timeout: duration,
+    mountOnEnter: true,
+    unmountOnExit: destroyOnClose,
+    preEnter: true,
+  })
+
+  const [popupTransition, togglePopup] = useTransitionState({
+    timeout: duration,
+    mountOnEnter: true,
+    unmountOnExit: destroyOnClose,
+    preEnter: true,
+  })
+
+  React.useEffect(() => {
+    toggleMask(visible)
+    togglePopup(visible)
+  }, [visible, toggleMask, togglePopup])
+
+  React.useEffect(() => {
+    if (popupTransition.status === 'entered' && onOpened) {
+      onOpened()
+    }
+    if (popupTransition.status === 'exited' && onClosed) {
+      onClosed()
+    }
+  }, [popupTransition.status, onOpened, onClosed])
+
   const onMaskClick = () => {
     if (maskClosable) onClose()
   }
@@ -67,59 +95,46 @@ export function Popup(props: PopupProps) {
 
     const opacity = mask === true ? 0.73 : mask
 
-    const maskCls = clsx(`${prefixCls}-mask`, maskClass)
+    const maskCls = clsx(`${prefixCls}-mask`, `${prefixCls}-fade-${maskTransition.status}`, maskClass)
 
-    return (
-      <CSSTransition
-        in={visible}
-        timeout={duration}
-        classNames={`${prefixCls}-fade`}
-        unmountOnExit={destroyOnClose}
-        appear
-      >
-        <div
-          className={maskCls}
-          style={{
-            zIndex,
-            transitionDuration: `${duration}ms`,
-            background: `rgba(0, 0, 0, ${opacity})`,
-            ...maskStyle,
-          }}
-          onClick={onMaskClick}
-        ></div>
-      </CSSTransition>
-    )
+    return maskTransition.isMounted ? (
+      <div
+        className={maskCls}
+        style={{
+          zIndex,
+          transitionDuration: `${duration}ms`,
+          background: `rgba(0, 0, 0, ${opacity})`,
+          ...maskStyle,
+        }}
+        onClick={onMaskClick}
+      ></div>
+    ) : null
   }
 
   const renderPopup = () => {
-    const popupCls = clsx(prefixCls, `${prefixCls}--${position}`, className)
-
-    return (
-      <CSSTransition
-        in={visible}
-        timeout={duration}
-        classNames={transition || animations[position]}
-        unmountOnExit={destroyOnClose}
-        appear
-        onEntered={onOpened}
-        onExited={onClosed}
-      >
-        <div
-          className={popupCls}
-          style={{
-            zIndex,
-            transitionDuration: `${duration}ms`,
-            ...style,
-          }}
-          ref={containerRef}
-          onClick={(e) => {
-            if (e.target === containerRef.current) onMaskClick()
-          }}
-        >
-          {children}
-        </div>
-      </CSSTransition>
+    const popupCls = clsx(
+      prefixCls,
+      `${prefixCls}--${position}`,
+      `${transition || animations[position]}-${popupTransition.status}`,
+      className
     )
+
+    return popupTransition.isMounted ? (
+      <div
+        className={popupCls}
+        style={{
+          zIndex,
+          transitionDuration: `${duration}ms`,
+          ...style,
+        }}
+        ref={containerRef}
+        onClick={(e) => {
+          if (e.target === containerRef.current) onMaskClick()
+        }}
+      >
+        {children}
+      </div>
+    ) : null
   }
 
   return (
