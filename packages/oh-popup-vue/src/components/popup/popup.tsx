@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { defineComponent, ref, Transition } from 'vue'
-import './index.scss'
+import './index.css'
 import { Portal } from './portal'
 import { Position } from './type'
 

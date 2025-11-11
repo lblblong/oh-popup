@@ -2,7 +2,7 @@ import { View } from '@tarojs/components'
 import clsx from 'clsx'
 import React, { FC } from 'react'
 import { Transition } from '../transition'
-import './index.scss'
+import './index.css'
 import { Position } from './type'
 
 const prefixCls = 'oh-popup'

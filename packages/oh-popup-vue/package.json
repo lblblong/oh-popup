@@ -1,26 +1,25 @@
 {
   "name": "oh-popup-vue",
-  "version": "0.0.3",
+  "version": "0.1.1",
   "files": [
     "dist"
   ],
   "type": "module",
-  "types": "./dist/index.d.ts",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "types": "./dist/index.d.mts",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "import": "./dist/index.js"
+      "import": "./dist/index.mjs"
     },
-    "./dist/style.css": {
-      "import": "./dist/style.css"
+    "./index.css": {
+      "import": "./dist/index.css"
     }
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview",
-    "prepublishOnly": "vue-tsc -b && vite build"
+    "dev": "tsdown --watch",
+    "build": "tsdown",
+    "prepublishOnly": "tsdown"
   },
   "dependencies": {
     "clsx": "^1.2.0"
@@ -30,10 +29,10 @@
     "vue": ">=3"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.1",
-    "oh-popup": "workspace:*",
+    "@vue/babel-preset-jsx": "^1.4.0",
+    "esbuild-plugin-babel": "^0.2.3",
     "typescript": "~5.6.2",
-    "vite": "^6.0.1",
-    "vue-tsc": "^2.1.10"
+    "unplugin-vue-jsx": "^0.8.1",
+    "vue-tsc": "^3.1.3"
   }
 }

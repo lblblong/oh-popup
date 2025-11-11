@@ -1,0 +1,136 @@
+.oh-popup-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.oh-popup {
+  position: fixed;
+  pointer-events: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.oh-popup::-webkit-scrollbar {
+  display: none;
+}
+
+.oh-popup--top {
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.oh-popup--bottom {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.oh-popup--left {
+  top: 0;
+  left: 0;
+  width: auto;
+  max-width: 100%;
+}
+
+.oh-popup--right {
+  top: 0;
+  right: 0;
+  width: auto;
+  max-width: 100%;
+}
+
+.oh-popup--center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+}
+
+/* animations */
+
+/* fade */
+
+.oh-popup-fade-enter-from,
+.oh-popup-fade-leave-to {
+  opacity: 0;
+}
+
+.oh-popup-fade-enter-active,
+.oh-popup-fade-leave-active {
+  transition: opacity, visibility;
+}
+
+.oh-popup-fade-enter-to,
+.oh-popup-fade-leave-from {
+  opacity: 1;
+}
+
+/* slide-left */
+.oh-popup-slide-left-enter-from,
+.oh-popup-slide-left-leave-to {
+  transform: translate(100%, 0);
+}
+
+.oh-popup-slide-left-enter-active,
+.oh-popup-slide-left-leave-active {
+  transition: transform;
+}
+
+.oh-popup-slide-left-enter-to,
+.oh-popup-slide-left-leave-from {
+  transform: translate(0, 0);
+}
+
+/* slide-up */
+.oh-popup-slide-up-enter-from,
+.oh-popup-slide-up-leave-to {
+  transform: translate(0, 100%);
+}
+
+.oh-popup-slide-up-enter-active,
+.oh-popup-slide-up-leave-active {
+  transition: transform;
+}
+
+.oh-popup-slide-up-enter-to,
+.oh-popup-slide-up-leave-from {
+  transform: translate(0, 0);
+}
+
+/* slide-right */
+.oh-popup-slide-right-enter-from,
+.oh-popup-slide-right-leave-to {
+  transform: translate(-100%, 0);
+}
+
+.oh-popup-slide-right-enter-active,
+.oh-popup-slide-right-leave-active {
+  transition: transform;
+}
+
+.oh-popup-slide-right-enter-to,
+.oh-popup-slide-right-leave-from {
+  transform: translate(0, 0);
+}
+
+/* slide-down */
+.oh-popup-slide-down-enter-from,
+.oh-popup-slide-down-leave-to {
+  transform: translate(0, -100%);
+}
+
+.oh-popup-slide-down-enter-active,
+.oh-popup-slide-down-leave-active {
+  transition: transform;
+}
+
+.oh-popup-slide-down-enter-to,
+.oh-popup-slide-down-leave-from {
+  transform: translate(0, 0);
+}

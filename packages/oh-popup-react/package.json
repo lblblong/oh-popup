@@ -1,26 +1,25 @@
 {
   "name": "oh-popup-react",
-  "version": "0.4.1",
+  "version": "0.5.1",
   "files": [
     "dist"
   ],
   "type": "module",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "exports": {
     ".": {
       "import": "./dist/index.js"
     },
-    "./dist/index.css": {
+    "./index.css": {
       "import": "./dist/index.css"
     }
   },
   "scripts": {
-    "dev": "tsc && vite build -w",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "prepublishOnly": "tsc && vite build"
+    "dev": "tsdown --watch",
+    "build": "tsdown",
+    "prepublishOnly": "tsdown"
   },
   "dependencies": {
     "clsx": "^1.2.0",

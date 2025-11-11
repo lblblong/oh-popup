@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import React from 'react'
 import { useTransitionState } from 'react-transition-state'
-import './index.scss'
+import './index.css'
 import { Portal } from './portal'
 import { Position } from './type'
 
