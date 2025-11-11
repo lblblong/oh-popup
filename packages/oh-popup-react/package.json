@@ -1,16 +1,16 @@
 {
   "name": "oh-popup-react",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "files": [
     "dist"
   ],
   "type": "module",
   "types": "./dist/index.d.mts",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "import": "./dist/index.js"
+      "import": "./dist/index.mjs"
     },
     "./index.css": {
       "import": "./dist/index.css"
